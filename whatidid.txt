@@ -1,0 +1,39 @@
+Optimize images (used irfanview and photoshop)
+
+made js async where possible
+
+inlined styles (there was no real below the fold, so I inlined everything)
+
+Changed the styles to prioritize smaller (mobile) devices -- no change to score, but 
+making a practice of mobile-first development.
+
+optimized delivery of web fonts by loading using js
+
+==TODO==
+
+minify html /js/ etc.
+
+compress everything
+
+
+
+
+Pizzas:
+
+reduced the number of animated pizzas to 12, because we don't actually see any more than 
+the first few pizzas. == Actually 48, because I started using a bigger monitor.
+
+changed the style of the .mover class to will-change: transform; (to create layer)
+
+moved the dx and newwidth variable definitions (for resizing pizzas) outside of the loop
+that iterates through the pizza resize.
+
+created a new variable pizzaElements to contain the pizza container ids (so we don't have to keep looking)
+
+change the querySelectorAll to getDocumentByClassName
+
+significantly simplified the code used to resize pizzas
+
+TODO:
+
+change the pizza container to will-change: transform; ?
