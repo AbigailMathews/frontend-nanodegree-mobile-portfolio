@@ -1,73 +1,71 @@
-## Website Performance Optimization portfolio project
+---
+output: pdf_document
+---
+# Frontend Nanodegree P4: Webpage Optimization
+### Author: Abigail Mathews
 
-Your challenge, if you wish to accept it (and we sure hope you will), is to optimize this online portfolio for speed! In particular, optimize the critical rendering path and make this page render as quickly as possible by applying the techniques you've picked up in the [Critical Rendering Path course](https://www.udacity.com/course/ud884).
+This project is designed to showcase an understanding of web performance 
+optimization, both in the delivery of html and css, and in ensuring smooth
+user experience from scripted page components.
 
-To get started, check out the repository, inspect the code,
+For the first goal, the aim was to achieve a 90+ PageSpeed Insights score for
+index.html.
 
-### Getting started
+For the second goal -- this time looking at views/pizza.html -- the aim was twofold:
 
-####Part 1: Optimize PageSpeed Insights score for index.html
+  * improve scrolling performance of background pizzas to 60fps 
+  
+  * ensure that the foreground pizzas could be resized in less than 5ms.
+  
+##File and Directory Structure
 
-Some useful tips to help you get started:
+For ease of evaluation, the project files include both minified and unminified versions of html, css, and js files.
+Certain js files (perfmatters and bootstrap) that are not unique to the project were left unminified. The index.html
+located in the root directory will allow for viewing of the full web page. 
 
-1. Check out the repository
-1. To inspect the site on your phone, you can run a local server
+To view **html** source code, please refer to the unminified versions of these files, designated with the .unmin.html 
+extensions. These are located in the same locations as the minified files.
 
-  ```bash
-  $> cd /path/to/your-project-folder
-  $> python -m SimpleHTTPServer 8080
-  ```
+In the case of **css** and **js**, the minified file names have been changed to the .min.css or .min.js extension, 
+respectively. As with the html, the minified css and js files which are used by the webpage appear in the same 
+directory as their unminified sources.
 
-1. Open a browser and visit localhost:8080
-1. Download and install [ngrok](https://ngrok.com/) to make your local server accessible remotely.
+The **pizza.html** file which is relevant for the second portion of this project is accessible either by navigating via
+web browser from the index.html home page and clicking on the 'Cam's Pizzeria' link, or directly, in views/pizza.html.
 
-  ``` bash
-  $> cd /path/to/your-project-folder
-  $> ngrok 8080
-  ```
+The repository also contains a gruntfile (gruntfile.js) along with the related node_modules directory and package.json files.
 
-1. Copy the public URL ngrok gives you and try running it through PageSpeed Insights! Optional: [More on integrating ngrok, Grunt and PageSpeed.](http://www.jamescryer.com/2014/06/12/grunt-pagespeed-and-ngrok-locally-testing/)
+##Part 1: Optimize PageSpeed Insights score for index.html
 
-Profile, optimize, measure... and then lather, rinse, and repeat. Good luck!
+Steps taken to achieve the target result in this stage:
 
-####Part 2: Optimize Frames per Second in pizza.html
+  1. Optimized images.
+    * I used Irfanview (with it's optimization plugin) along with Photoshop.
+    * I created several versions of pizzeria images for thumbnail vs. full size views.
+  2. Inlined Styles.
+    * There was no real 'below the fold' so everything was inlined, in this case.
+    * I modified the styles to prioritize loading for smaller (mobile devices). Though there
+    was no performance gain, I wanted to make a practice of mobile-first development.
+    * Used media queries to remove print styles from blocking page rendering.
+  3. Made Javascript async where possible.
+  4. Optimized deliver of Web Fonts using Javascript.
+  5. Minified html/css and js. I used grunt to facilitate this process.
 
-To optimize views/pizza.html, you will need to modify views/js/main.js until your frames per second rate is 60 fps or higher. You will find instructive comments in main.js. 
 
-You might find the FPS Counter/HUD Display useful in Chrome developer tools described here: [Chrome Dev Tools tips-and-tricks](https://developer.chrome.com/devtools/docs/tips-and-tricks).
+##Part 2: Optimize Frames per Second in pizza.html
 
-### Optimization Tips and Tricks
-* [Optimizing Performance](https://developers.google.com/web/fundamentals/performance/ "web performance")
-* [Analyzing the Critical Rendering Path](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/analyzing-crp.html "analyzing crp")
-* [Optimizing the Critical Rendering Path](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/optimizing-critical-rendering-path.html "optimize the crp!")
-* [Avoiding Rendering Blocking CSS](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/render-blocking-css.html "render blocking css")
-* [Optimizing JavaScript](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/adding-interactivity-with-javascript.html "javascript")
-* [Measuring with Navigation Timing](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/measure-crp.html "nav timing api"). We didn't cover the Navigation Timing API in the first two lessons but it's an incredibly useful tool for automated page profiling. I highly recommend reading.
-* <a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/eliminate-downloads.html">The fewer the downloads, the better</a>
-* <a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/optimize-encoding-and-transfer.html">Reduce the size of text</a>
-* <a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/image-optimization.html">Optimize images</a>
-* <a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching.html">HTTP caching</a>
+Steps take to improve performance of pizza.html: 
 
-### Customization with Bootstrap
-The portfolio was built on Twitter's <a href="http://getbootstrap.com/">Bootstrap</a> framework. All custom styles are in `dist/css/portfolio.css` in the portfolio repo.
+  1. Reduced the number of animated pizzas in the background to 36, which is enough to fill
+  the background of a large monitor.
+  
+  2. Changed the style of .mover class (which is the class for the animated pizzas) to will-change:transform; to create a new layer for the pizzas.
+  
+  3. Moved variable definitions outside of loops in both changePizzaSizes and updatePositions functions.
+  
+  4. Created a variable pizzaElements in changePizzaSizes to hold the results of a document element lookup, and used the more efficient getElementsByClassName rather than querySelectorAll to retrieve relevant portions of the html document.
+  
+  5. Significantly streamlined the code that calculates the pizza resizing delta in determineDx.
 
-* <a href="http://getbootstrap.com/css/">Bootstrap's CSS Classes</a>
-* <a href="http://getbootstrap.com/components/">Bootstrap's Components</a>
 
-### Sample Portfolios
-
-Feeling uninspired by the portfolio? Here's a list of cool portfolios I found after a few minutes of Googling.
-
-* <a href="http://www.reddit.com/r/webdev/comments/280qkr/would_anybody_like_to_post_their_portfolio_site/">A great discussion about portfolios on reddit</a>
-* <a href="http://ianlunn.co.uk/">http://ianlunn.co.uk/</a>
-* <a href="http://www.adhamdannaway.com/portfolio">http://www.adhamdannaway.com/portfolio</a>
-* <a href="http://www.timboelaars.nl/">http://www.timboelaars.nl/</a>
-* <a href="http://futoryan.prosite.com/">http://futoryan.prosite.com/</a>
-* <a href="http://playonpixels.prosite.com/21591/projects">http://playonpixels.prosite.com/21591/projects</a>
-* <a href="http://colintrenter.prosite.com/">http://colintrenter.prosite.com/</a>
-* <a href="http://calebmorris.prosite.com/">http://calebmorris.prosite.com/</a>
-* <a href="http://www.cullywright.com/">http://www.cullywright.com/</a>
-* <a href="http://yourjustlucky.com/">http://yourjustlucky.com/</a>
-* <a href="http://nicoledominguez.com/portfolio/">http://nicoledominguez.com/portfolio/</a>
-* <a href="http://www.roxannecook.com/">http://www.roxannecook.com/</a>
-* <a href="http://www.84colors.com/portfolio.html">http://www.84colors.com/portfolio.html</a>
+I additionally performed minification tasks on the html css and javascript for the pizzas.html portion of the project.
