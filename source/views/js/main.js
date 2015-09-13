@@ -15,7 +15,7 @@ Creator:
 Cameron Pittman, Udacity Course Developer
 cameron *at* udacity *dot* com
 */
-
+"use strict";
 // As you may have realized, this website randomly generates pizzas.
 // Here are arrays of all possible pizza ingredients.
 var pizzaIngredients = {};
@@ -425,7 +425,7 @@ var resizePizzas = function(size) {
   function determineDx (elem, size) {
 	// Find out how big the page and pizzas are now, so we have a baseline.
     var oldwidth = elem[0].offsetWidth;
-    var windowwidth = document.querySelector("#randomPizzas").offsetWidth;
+    var windowwidth = document.getElementById("randomPizzas").offsetWidth;
     var oldsize = oldwidth / windowwidth;
 
     // Changes the slider value to a percent width
@@ -458,7 +458,8 @@ var resizePizzas = function(size) {
 	// Determine the appropriate width in pixels to resize our pizzas.
     var dx = determineDx(pizzaElements, size);
     var newwidth = (pizzaElements[0].offsetWidth + dx) + 'px';
-    for (var i = 0; i < pizzaElements.length; i++) {
+    var len = pizzaElements.length;
+    for (var i = 0; i < len; i++) {
 	  //Change the pizza widths to the appropriately calculated size.
       pizzaElements[i].style.width = newwidth;
     }
@@ -476,8 +477,8 @@ var resizePizzas = function(size) {
 window.performance.mark("mark_start_generating"); // collect timing data
 
 // This for-loop actually creates and appends all of the pizzas when the page loads
+var pizzasDiv = document.getElementById("randomPizzas");
 for (var i = 2; i < 100; i++) {
-  var pizzasDiv = document.getElementById("randomPizzas");
   pizzasDiv.appendChild(pizzaElementGenerator(i));
 }
 
@@ -514,10 +515,12 @@ function updatePositions() {
   // getElementsByClassName increases speed of retrieval of the moving pizzas
   var items = document.getElementsByClassName('mover');
   var scroll = (document.body.scrollTop / 1250);
-  for (var i = 0; i < items.length; i++) {
+  var len = items.length;
+  var phase;
+  for (var i = 0; i < len; i++) {
     // Do a calculation to determine how each pizza should move based on its
 	// position on the page, and apply the movement change.
-    var phase = Math.sin(scroll + (i % 5));
+    phase = Math.sin(scroll + (i % 5));
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
   }
 
@@ -538,16 +541,21 @@ window.addEventListener('scroll', updatePositions);
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
-  //Create just 36 pizzas so that we dont' make more than fit a (large) monitor.
-  for (var i = 0; i < 36; i++) {
-    var elem = document.createElement('img');
+  //Figure out how many pizzas should be generated to fit the screen height.
+  var screenHeight = window.screen.height;
+  var rows = Math.floor(screenHeight/256);
+  var numberOfPizzas = rows * cols;
+  var elem;
+  var movingPizzas = document.getElementById("movingPizzas1");
+  for (var i = 0; i < numberOfPizzas; i++) {
+    elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
     elem.style.height = "100px";
     elem.style.width = "73.333px";
     elem.basicLeft = (i % cols) * s;
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
-    document.querySelector("#movingPizzas1").appendChild(elem);
+    movingPizzas.appendChild(elem);
   }
   updatePositions();
 });

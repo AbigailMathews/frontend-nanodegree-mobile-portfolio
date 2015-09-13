@@ -4,17 +4,17 @@ module.exports = function(grunt) {
     grunt.initConfig({
         uglify: {
             dist: {
-                src: 'views/js/main.js',
-                dest: 'views/js/main.min.js'
+                src: 'source/views/js/main.js',
+                dest: 'dist/views/js/main.min.js'
 			}
 		},
         cssmin: {
             target: {
                 files: [{
                     expand: true,
-                    cwd: 'css',
+                    cwd: 'source/css',
                     src: ['*.css', '!*.min.css'],
-                    dest: 'css',
+                    dest: 'dist/css',
                     ext: '.min.css'
                 }]
             }
@@ -23,9 +23,9 @@ module.exports = function(grunt) {
             target: {
                 files: [{
                     expand: true,
-                    cwd: 'views/css',
+                    cwd: 'source/views/css',
                     src: ['*.css', '!*.min.css'],
-                    dest: 'views/css',
+                    dest: 'dist/views/css',
                     ext: '.min.css'
                 }]
             }
@@ -39,22 +39,22 @@ module.exports = function(grunt) {
 					minifyCSS: true
 				},
 				files: {
-					'index.html': 'index.unmin.html',
-					'project-2048.html': 'project-2048.unmin.html',
-					'project-webperf.html': 'project-webperf.unmin.html',
-					'project-mobile.html': 'project-mobile.unmin.html',
-					'views/pizza.html': 'views/pizza.unmin.html'					
+					'dist/index.html': 'source/index.unmin.html',
+					'dist/project-2048.html': 'source/project-2048.unmin.html',
+					'dist/project-webperf.html': 'source/project-webperf.unmin.html',
+					'dist/project-mobile.html': 'source/project-mobile.unmin.html',
+					'dist/views/pizza.html': 'source/views/pizza.unmin.html'					
 				}
 			},
 			
 		},
 		watch: {
 			uglify: {
-				files: 'views/js/main.js',
+				files: 'source/views/js/main.js',
 				tasks: ['uglify']
 			},
 			htmlmin: {
-				files: 'index.unmin.html',
+				files: 'source/index.unmin.html',
 				tasks: ['htmlmin']
 			}
 		}
