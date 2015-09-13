@@ -1,6 +1,4 @@
----
-output: pdf_document
----
+
 # Frontend Nanodegree P4: Webpage Optimization
 ### Author: Abigail Mathews
 
@@ -69,3 +67,9 @@ Steps take to improve performance of pizza.html:
 
 
 I additionally performed minification tasks on the html css and javascript for the pizzas.html portion of the project.
+
+##Viewing Instructions
+
+To view the optimized webpage, either:
+    - Click on **dist/index.html** to access the page locally (offline), or
+    - Navigate to [http://AbigailMathews.github.io/frontend-nanodegree-mobile-portfolio-gh-pages/](http://AbigailMathews.github.io/frontend-nanodegree-mobile-portfolio-gh-pages/)
