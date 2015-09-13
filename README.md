@@ -72,6 +72,6 @@ I additionally performed minification tasks on the html css and javascript for t
 
 To view the optimized webpage, either:
 
-    * Click on **dist/index.html** to access the page locally (offline), or
-    
-    * Navigate to [http://AbigailMathews.github.io/frontend-nanodegree-mobile-portfolio/dist/](http://AbigailMathews.github.io/frontend-nanodegree-mobile-portfolio/dist/)
+  * Click on **dist/index.html** to access the page locally (offline), or
+  
+  * Navigate to [http://AbigailMathews.github.io/frontend-nanodegree-mobile-portfolio/dist/](http://AbigailMathews.github.io/frontend-nanodegree-mobile-portfolio/dist/).
